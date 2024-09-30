@@ -7,6 +7,35 @@
     <link rel="stylesheet" href="theme.css" />
   </head>
   <body>
+    <div class="container pt5" id="app">
+      <div class="card center">
+        <h1 :style="{color: inputValue.length ? 'red' : 'aquamarine', fontSize: inputValue.length ? '22px' : '26px'}">{{title}}</h1>
+        <div class="form-controll">
+          <input
+            type="text"
+            :placeholder="myPlaceholder"
+            :value="inputValue"
+            v-model="inputValue"
+            @keypress.enter="addNote"
+          />
+        </div>
+        <h3>value:{{inputValue}}</h3>
+        <button class="btn" v-on:click="addNote">Add</button>
+        <hr />
+        <div v-if="!notes.length">no notes</div>
+        <ul class="list" v-if="notes.length">
+          <li class="list-item" v-for="(myNote, i) in notes">
+            <span :class="myNote.length > 5 ? 'primary' : 'bold'">({{i + 1}}) {{toUpper(myNote)}}</span>
+            <button class="btn" v-on:click="removeNote(i)">delete</button>
+          </li>
+        </ul>
+        <br />
+        <div>General amount: {{notes.length}}</div>
+        <div>Double amount: {{doubleCount}}</div>
+      </div>
+    </div>
 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="appOne.js"></script>
   </body>
 </html>
